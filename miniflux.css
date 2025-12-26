@@ -1,3 +1,4 @@
+@import url("./normalize.css");
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
 :root {
@@ -10,35 +11,38 @@
   --border: #313232;
   --background: #1b1c1d;
   --background-light: #242424;
+  --background-alt: #242628;
   --foreground-dimmed: #667f99;
+  --magenta-light: #edabe8;
+  --blue-light: #56b0f0;
   /* Miniflux */
   --body-color: var(--foreground);
   --body-background: var(--background);
   --hr-border-color: var(--border);
   --title-color: var(--foreground-light);
   --link-color: var(--foreground);
-  --link-focus-color: #ddd;
+  --link-focus-color: var(--foreground);
   --link-hover-color: var(--foreground-light);
-  --link-visited-color: #f083e4;
-  --header-list-border-color: #333;
-  --header-link-color: #ddd;
-  --header-link-focus-color: rgba(82, 168, 236, 0.85);
-  --header-link-hover-color: rgba(82, 168, 236, 0.85);
-  --header-active-link-color: #9b9494;
+  --link-visited-color: var(--magenta-light);
+  --header-list-border-color: var(--border);
+  --header-link-color: var(--foreground);
+  --header-link-focus-color: var(--foreground-light);
+  --header-link-hover-color: var(--foreground-light);
+  --header-active-link-color: var(--blue-light);
   --page-header-title-color: var(--foreground-light);
   --page-header-title-border-color: transparent;
   --logo-color: var(--foreground);
-  --logo-hover-color-span: #bbb;
+  --logo-hover-color-span: initial;
   --table-border-color: var(--border);
   --table-th-background: #333;
   --table-th-color: #aaa;
   --table-tr-hover-background-color: #333;
   --table-tr-hover-color: #aaa;
-  --button-primary-border-color: #444;
-  --button-primary-background: #333;
-  --button-primary-color: #efefef;
-  --button-primary-focus-border-color: #888;
-  --button-primary-focus-background: #555;
+  --button-primary-border-color: var(--border);
+  --button-primary-background: var(--background-alt);
+  --button-primary-color: var(--foreground);
+  --button-primary-focus-border-color: var(--border);
+  --button-primary-focus-background: var(--background-light);
   --input-border: 1px solid var(--border);
   --input-background: var(--background-light);
   --input-color: var(--foreground);
@@ -102,6 +106,12 @@
   --counter-color: #bbb;
 }
 
+a {
+  text-decoration: none;
+}
+
+/* Header */
+
 .header :is(a, summary) {
   display: flex;
   gap: 0.1rem;
@@ -120,9 +130,25 @@
   gap: 8px;
 }
 
-fieldset {
+.header li a:hover {
+  color: var(--foreground);
+}
+
+fieldset,
+select {
   border: 1px solid var(--border);
   border-radius: 4px;
+}
+
+select {
+  margin: 0.5rem 0;
+  font-size: 12px;
+  color: var(--foreground);
+}
+
+label {
+  font-size: 12px;
+  color: var(--foreground-dimmed);
 }
 
 .page-header h1 {
@@ -131,20 +157,29 @@ fieldset {
   margin-bottom: 0.5rem;
 }
 
+/* Item Lists */
+
 .items {
   display: flex;
   flex-direction: column;
   --space: 8px;
-  gap: var(--space);
+  /* gap: var(--space); */
   padding: var(--space);
 }
 
 .item {
-  border-style: solid;
-  border-radius: 4px;
-  /* background: var(--background-light); */
+  border: none;
+  border-bottom: 1px solid var(--border);
   margin: 0;
+  padding: 16px 0;
 }
+
+article.feed-has-unread,
+article.feed-parsing-error {
+  border: none;
+}
+
+/* Item Content */
 
 .item-meta-info li:not(:last-child):after {
   content: " | ";
@@ -164,10 +199,24 @@ fieldset {
 }
 
 .item-meta :is(a:is(:focus, :hover), button:is(:focus, :hover)) {
-  color: var(--foreground-light);
+  color: var(--foreground-dimmed);
   font-size: 12px;
 }
 
 .item-meta-icons a span {
   text-decoration: none;
+}
+
+/* Buttons */
+
+.button {
+  font-size: 12px;
+  padding: 4px 6px;
+  border-radius: 4px;
+}
+
+/* Pagination */
+
+.pagination {
+  font-size: 12px;
 }
